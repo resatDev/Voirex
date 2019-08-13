@@ -2,8 +2,9 @@ import VoiceAssistant from './manager';
 
 var recogni = new VoiceAssistant({
     keyword : ["Lorem", "Ipsum"],
-    starting : false,
-    func: console.log("\t\t\t\t\tHello World!")
+    starting : true,
+    func: 'console.log("\t\t\t\t\tHello World!")',
+    accuracy: '50%'
 })
 
-recogni.accuracyItem();
+console.log(recogni.showResult())

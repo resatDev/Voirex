@@ -1,71 +1,132 @@
 'use strict';
 
 const setText = () => {
-    let textRaw = "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır. Beşyüz yıl boyunca varlığını sürdürmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sıçramıştır. 1960'larda Lorem Ipsum pasajları da içeren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker gibi Lorem Ipsum sürümleri içeren masaüstü yayıncılık yazılımları ile popüler olmuştur.";
+    let textRaw = "Lorem Ipsum";
     let textPrc = textRaw.split(' ').map(item => item);
     return textPrc
 };
 
 const voiceApi = (starting, timeZone) => {
-    if(starting){
+    if(starting == true){
         return setText()
     }else{
         return "-1"
     }
 };
 
-/*
-******If the accuracy >70 and <90 
-*/
-function accuracyHigh (keywords = [], rawText) {
+function textMining (keywords = [], rawText) {
     let result = [];
-    rawText == "-1" ? "-1" : 
-    result = rawText.map(item => {
-        for(var i = 0; i < keywords.length; i++){
-            if(item.includes(keywords[i])){
-                return item
-            }else {
-                continue
+    if(rawText == "-1") { 
+        return  "-1" 
+    } 
+    else{
+        result = rawText.map(item => {
+            for(var i = 0; i < keywords.length; i++){
+                if(item.includes(keywords[i])){
+                    return item
+                }else {
+                    continue
+                }
             }
+        });
+        result = result.filter(function (el) {
+            return el != null;
+        });
+        if(result.length != 0){
+            return result
         }
-    });
-    return result.filter(function (el) {
-        return el != null;
-    });
+        else{
+            return "-1"
+        }
+    }   
+}
+
+/*
+    Accuracy 100%
+*/
+function makeResultAbs(result, keyword, func){
+    if(Array.isArray(keyword)){
+        if(keyword.join(" ") == result.join(" ")){
+            let new_func = new Function(func);
+            return new_func()
+        }
+        else{
+            return "There is nothing absolute inner"
+        }
+    }
+    else{
+        return "There is nothing absolute"
+    }
+}
+/* 
+    Accuracy 70%
+*/
+function makeResultHigh (result ,keyword, func){
+    let new_func = new Function(func);
+    if(result != "-1"){
+        keyword.map(item => {
+            if(result.join(" ").includes(item)){
+                return new_func()
+            }
+        });
+    }else{
+        return "There is nothing to show"
+    }
 }
 /*
-*******If the accuracy <70 and >50
-*/
-
-function makeResult (result = [], func){
-    return result == [] ? console.log("There is nothing") : func()
+    Accuracy 50%
+*/ 
+function makeResultMid (result ,keyword, func){
+    let new_func = new Function(func);
+    if(result != "-1"){
+        keyword.map(item => {
+            if(result.join(" ").includes(item)){
+                return new_func()
+            }
+        });
+    }else{
+        return "There is nothing to show"
+    }
 }
 
 class VoiceAssistant {
-    constructor(command = { keyword : [], starting : false, func : (() => {return "null"})} ){
+    constructor(command = { keyword : [], starting : false, func : '(() => {return "null"})', accuracy: '70%'} ){
         this.command = command;
         this.voiceApi = voiceApi;
-        this.accuracyHigh = accuracyHigh;
-        this.makeResult = makeResult;
-    }
-    startRecognition() {
-        return voiceApi(this.command.starting)
+        this.textMining = textMining;
+        this.makeResultHigh = makeResultHigh;
+        this.makeResultAbs = makeResultAbs;
+        this.makeResultMid = makeResultMid;
     }
     getCommand(){
         return this.command
     }
+    controlling(){
+        return textMining(this.getCommand().keyword, this.startRecognition())
+    }
+    startRecognition() {
+        return voiceApi(this.command.starting)
+    }
     accuracyItem(){
-        return accuracyHigh(this.getCommand().keyword, this.startRecognition())
+        return textMining(this.getCommand().keyword, this.startRecognition())
     }
     showResult(){
-        makeResult(this.accuracyItem(), this.func);
+        switch (this.command.accuracy){
+            case '100%':
+                return this.makeResultAbs(this.accuracyItem(), this.command.keyword, this.command.func);
+            case '70%':
+                return this.makeResultHigh(this.accuracyItem(), this.command.keyword, this.command.func);
+            case '50%':
+                return this.makeResultMid(this.accuracyItem(), this.command.keyword, this.command.func)
+        }
     }
 }
 
 var recogni = new VoiceAssistant({
     keyword : ["Lorem", "Ipsum"],
-    starting : false,
-    func: console.log("\t\t\t\t\tHello World!")
+    starting : true,
+    func: 'console.log("\t\t\t\t\tHello World!")',
+    accuracy: '50%'
 });
 
-recogni.accuracyItem();
+console.log(recogni.showResult());
