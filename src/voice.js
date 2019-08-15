@@ -1,7 +1,7 @@
 import {setText} from './text'
-export const voiceApi = (starting, timeZone) => {
+export const voiceApi = (starting) => {
     if(starting == true){
-        return setText(timeZone)
+        return setText()
     }else{
         return "-1"
     }

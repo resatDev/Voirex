@@ -1,10 +1,10 @@
 import VoiceAssistant from './manager';
 
-var recogni = new VoiceAssistant({
+var recogni = new VoiceAssistant('type-1',{
     keyword : ["Lorem", "Ipsum"],
-    starting : true,
+    starting : false,
     func: 'console.log("\t\t\t\t\tHello World!")',
-    accuracy: '50%'
+    accuracy: '-151%'
 })
 
-console.log(recogni.showResult())
+console.log(recogni.controlling())
