@@ -1,4 +1,9 @@
+/**
+ * 
+ *  Converting Accuracy to a Number (Developer Accuracy) 
+ */
 export function howMuchAccuracy(accuracy){
-   var acc = accuracy.split('');
-   return Number(acc.splice(0,acc.length - 1).join(''))
-}
+    var acc = accuracy.split('');
+    return Number(acc.splice(0,acc.length - 1).join(''))
+ }
+ 

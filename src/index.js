@@ -1,10 +1,25 @@
 import VoiceAssistant from './manager';
 
-var recogni = new VoiceAssistant('type-1',{
-    keyword : ["Lorem", "Ipsum"],
-    starting : false,
-    func: 'console.log("\t\t\t\t\tHello World!")',
-    accuracy: '-151%'
-})
+function myfunc(){
+    alert('It is successfully working!')
+}
 
-console.log(recogni.controlling())
+var recognition = new VoiceAssistant(
+    {
+        type: 'browserDefault',
+        lang: 'tr-TR'
+    },
+    {
+        keyword: ['merhaba', 'selam'],
+        func: myfunc,
+        accuracy: '2%',
+        pref: 'max'
+    }
+)
+
+var new_recogntion = recognition.setVoiceRecConfig();
+recognition.startRecognition(new_recogntion);
+new_recogntion.onresult = (event) => {
+    console.log(recognition.resultProcessVoiceRecog(recognition.getVoiceText(event)))
+}
+

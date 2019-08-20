@@ -1,54 +1,134 @@
-import {voiceApi} from './voice';
-import {textMining} from './process';
-import {makeResultHigh, makeResultAbs, makeResultMid, makeResultLow} from './result';
-import {howMuchAccuracy} from './accuracy'
-import {startTakingText, stopTakingText, takeText} from './dataFlow'
-import { setText } from './text';
+import { howMuchAccuracy } from './accuracy'
+import { isEmpty } from './isEmpty'
+import { getVoiceApiInfo } from './voiceApiInfo'
+import { setVoiceRecognition, startRecord, stopRecord, instruction } from './browserVR'
+import { existingVoiceApi } from './whichApi';
+import { levenshtein } from './distanceKeyRec';
+import { actualAccuracy } from './actualAccuracy'
+import { maxAccuracy, minAccuracy } from './accuracyMaxMin'
+import { resultProcessingVR } from './result'
+
 class VoiceAssistant {
-    constructor(voiceType = '' ,command = { keyword : [], starting : false, func : '(() => {return "null"})', accuracy: '70%'} ){
-        this.command = command;
-        this.voiceApi = voiceApi;
-        this.textMining = textMining;
-        this.makeResultHigh = makeResultHigh;
-        this.makeResultAbs = makeResultAbs;
-        this.makeResultMid = makeResultMid;
-        this.makeResultLow = makeResultLow;
-        this.howMuchAccuracy = howMuchAccuracy;
+    constructor(
+        voiceType = {
+            type: '',
+            lang: ''
+        },
+        command = {
+            keyword: [],
+            func : '',
+            accuracy: '',
+            pref: ''
+        }
+    )
+    {
+        //Properties of VoiceAssistant
         this.voiceType = voiceType;
-        this.startTakingText = startTakingText;
-        this.stopTakingText = stopTakingText;
-        this.takeText = takeText;
-        this.setText = setText;
+        this.command = command;
+
+        //Developer accuracy
+        this.howMuchAccuracy = howMuchAccuracy;
+
+        //voiceText is empty or not
+        this.isEmpty = isEmpty;
+
+        //about prefered Voice Recognition Api
+        this.getVoiceApiInfo = getVoiceApiInfo;
+
+        //voice api exist or not
+        this.existingVoiceApi = existingVoiceApi;
+
+        //similarity between keywords and voiceText as Levenshtein Distance Algorithm
+        this.levenshtein = levenshtein;
+
+        //Levenshtein accuracy of each keyword item
+        this.actualAccuracy = actualAccuracy;
+
+        //max and min accuracy
+        this.maxAccuracy = maxAccuracy;
+        this.minAccuracy = minAccuracy;
+
+        //resulting
+        this.resultProcessVR = resultProcessingVR;
+
+        /*
+            Browser Recognition Process
+        */ 
+        this.setVoiceRecognition = setVoiceRecognition; //set the congif of recognition
+        this.startRecord = startRecord;                 //start the recording
+        this.stopRecord = stopRecord;                   //stop the recording
+        this.instruction = instruction;                 //get the voice text
     }
-    /*
-    getCommand(){
-        return this.command
+
+    //To learn about the Voice Recognition Api you preferred
+    getAPIInfo(){
+        return getVoiceApiInfo(this.voiceType.type);
     }
-    */
-    controlling(){
-        return this.stopTakingText(["osman", "ali", "hüseyin"], 2);
+
+    //converting command.accuracy to a number
+    developerAccuracyNum(){
+        return howMuchAccuracy(this.command.accuracy);
     }
-    startRecognition() {
-        return voiceApi(this.command.starting)
+
+    //checking: voiceText is empty or not
+    checkingVoiceText(){
+        return isEmpty(voiceText);
     }
-    resultTextMining(){
-        return textMining(this.command.keyword, this.startRecognition())
+
+    //Check the voice Api Exist or not
+    checkingVoiceApi(){
+        return this.existingVoiceApi(this.getVoiceApiInfo(this.voiceType.type));
     }
-    showResult(){
-        if(this.howMuchAccuracy(this.command.accuracy) > 89 && this.howMuchAccuracy(this.command.accuracy) < 101){
-            return makeResultAbs(this.resultTextMining(), this.command.keyword, this.command.func)
+
+    //Levenshtein Distance Algorithm
+    checkActualAccuracy(voiceText){
+        return actualAccuracy(this.levenshtein, this.command.keyword, voiceText);
+    }
+
+    //check max Accuracy 
+    checkMax(voiceText){
+        return maxAccuracy(this.checkActualAccuracy(voiceText));
+    }
+
+    //check min Accuracy
+    checkMin(voiceText){
+        return minAccuracy(this.checkActualAccuracy(voiceText));
+    }
+
+    //setting configuration of a new Voice Recognition
+    setVoiceRecConfig() {
+        return setVoiceRecognition(this.voiceType.lang);
+    }
+
+    //starting Voice Recognition
+    startRecognition(recognition){
+        startRecord(recognition);
+    }
+
+    //stoping Voice Recognition
+    stopRecognition(recognition){
+        stopRecord(recognition)
+    }
+
+    //getting Voice Text
+    getVoiceText(e){
+        return this.instruction(e)
+    }
+
+    //Developer preference max or min
+    devPref(voiceText){
+        switch(this.command.pref){
+            case 'max':
+                return this.checkMax(voiceText);
+            case 'min':
+                return this.checkMin(voiceText);
         }
-        else if(this.howMuchAccuracy(this.command.accuracy) < 90 && this.howMuchAccuracy(this.command.accuracy) > 69){
-            return makeResultHigh(this.resultTextMining(), this.command.keyword, this.command.func);
-        }   
-        else if(this.howMuchAccuracy(this.command.accuracy) < 70 && this.howMuchAccuracy(this.command.accuracy) > 49){
-            return makeResultMid(this.resultTextMining() , this.command.keyword, this.command.func);
-        }
-        else if(this.howMuchAccuracy(this.command.accuracy) < 50 && this.howMuchAccuracy(this.command.accuracy) >= 0){
-            return makeResultLow(this.resultTextMining(),this.command.func)
-        }else{
-            return "*****\n\nYour accuracy value is over range of the default values, please update your accuracy value between 0 and 100!\n\n*****"
-        }
+    }
+
+    //result all process
+    resultProcessVoiceRecog(voiceText){
+        return this.resultProcessVR(this.devPref(voiceText), this.developerAccuracyNum(), this.command.func)
     }
 }
-export default VoiceAssistant
+
+export default VoiceAssistant;

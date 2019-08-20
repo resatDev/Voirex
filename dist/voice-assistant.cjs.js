@@ -1,186 +1,470 @@
 'use strict';
 
-const setText = () => {
-    let alt_text = "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır. Beşyüz yıl boyunca varlığını sürdürmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sıçramıştır. 1960'larda Lorem Ipsum pasajları da içeren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker gibi Lorem Ipsum sürümleri içeren masaüstü yayıncılık yazılımları ile popüler olmuştur.";
-    let textPrc = alt_text.split(' ');
-    return textPrc
-};
+/**
+ * 
+ *  Converting Accuracy to a Number (Developer Accuracy) 
+ */
+function howMuchAccuracy(accuracy){
+    var acc = accuracy.split('');
+    return Number(acc.splice(0,acc.length - 1).join(''))
+ }
 
-const voiceApi = (starting) => {
-    if(starting == true){
-        return setText()
+/**
+ * 
+ * CHECK RECOGNITON TEXT IS EMPTY OR NOT
+ */ 
+
+const isEmpty = (recognitionText) => {
+
+    // If text is not empty --> return recognitionText
+    if(recognitionText != ''){
+        return recognitionText
+
+    // If text is empty --> return Error Message "-1"
     }else{
         return "-1"
     }
 };
 
-function textMining (keywords = [], rawText) {
-    let result = [];
-    if(rawText == "-1") { 
-        return  "-1" 
-    } 
-    else{
-        result = rawText.map(item => {
-            for(var i = 0; i < keywords.length; i++){
-                if(item.includes(keywords[i])){
-                    return item
-                }else {
-                    continue
-                }
+/**
+ * 
+ * Take the properties and info about the Voice Recognition API 
+ * which developer preffered as argument of getVoiceApiInfo()
+ */
+
+function getVoiceApiInfo(voiceApiType){
+    
+  //Default Browser Voice Recognition Api
+  let browserDefaultVoiceApi =  `
+            /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+            /*/*/*/DEFAULT BROWSER VOICE RECOGNITION/*/*/*/*
+            /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+
+           "Interim Results": mutable (default false) \n\n
+           "Maximum" Alternatives: mutable (default 1) \n\n
+           "Lang" : mutable (default meta charset) \n\n
+           
+           { 
+            "Afrikaans": [
+              ["South Africa", "af-ZA"]
+            ],
+            "Arabic" : [
+              ["Algeria","ar-DZ"],
+              ["Bahrain","ar-BH"],
+              ["Egypt","ar-EG"],
+              ["Israel","ar-IL"],
+              ["Iraq","ar-IQ"],
+              ["Jordan","ar-JO"],
+              ["Kuwait","ar-KW"],
+              ["Lebanon","ar-LB"],
+              ["Morocco","ar-MA"],
+              ["Oman","ar-OM"],
+              ["Palestinian Territory","ar-PS"],
+              ["Qatar","ar-QA"],
+              ["Saudi Arabia","ar-SA"],
+              ["Tunisia","ar-TN"],
+              ["UAE","ar-AE"]
+            ],
+            "Basque": [
+              ["Spain", "eu-ES"]
+            ],
+            "Bulgarian": [
+              ["Bulgaria", "bg-BG"]
+            ],
+            "Catalan": [
+              ["Spain", "ca-ES"]
+            ],
+            "Chinese Mandarin": [
+              ["China (Simp.)", "cmn-Hans-CN"],
+              ["Hong Kong SAR (Trad.)", "cmn-Hans-HK"],
+              ["Taiwan (Trad.)", "cmn-Hant-TW"]
+            ],
+            "Chinese Cantonese": [
+              ["Hong Kong", "yue-Hant-HK"]
+            ],
+            "Croatian": [
+              ["Croatia", "hr_HR"]
+            ],
+            "Czech": [
+              ["Czech Republic", "cs-CZ"]
+            ],
+            "Danish": [
+              ["Denmark", "da-DK"]
+            ],
+            "English": [
+              ["Australia", "en-AU"],
+              ["Canada", "en-CA"],
+              ["India", "en-IN"],
+              ["Ireland", "en-IE"],
+              ["New Zealand", "en-NZ"],
+              ["Philippines", "en-PH"],
+              ["South Africa", "en-ZA"],
+              ["United Kingdom", "en-GB"],
+              ["United States", "en-US"]
+            ],
+            "Farsi": [
+              ["Iran", "fa-IR"]
+            ],
+            "French": [
+              ["France", "fr-FR"]
+            ],
+            "Filipino": [
+              ["Philippines", "fil-PH"]
+            ],
+            "Galician": [
+              ["Spain", "gl-ES"]
+            ],
+            "German": [
+              ["Germany", "de-DE"]
+            ],
+            "Greek": [
+              ["Greece", "el-GR"]
+            ],
+            "Finnish": [
+              ["Finland", "fi-FI"]
+            ],
+            "Hebrew" :[
+              ["Israel", "he-IL"]
+            ],
+            "Hindi": [
+              ["India", "hi-IN"]
+            ],
+            "Hungarian": [
+              ["Hungary", "hu-HU"]
+            ],
+            "Indonesian": [
+              ["Indonesia", "id-ID"]
+            ],
+            "Icelandic": [
+              ["Iceland", "is-IS"]
+            ],
+            "Italian": [
+              ["Italy", "it-IT"],
+              ["Switzerland", "it-CH"]
+            ],
+            "Japanese": [
+              ["Japan", "ja-JP"]
+            ],
+            "Korean": [
+              ["Korea", "ko-KR"]
+            ],
+            "Lithuanian": [
+              ["Lithuania", "lt-LT"]
+            ],
+            "Malaysian": [
+              ["Malaysia", "ms-MY"]
+            ],
+            "Dutch": [
+              ["Netherlands", "nl-NL"]
+            ],
+            "Norwegian": [
+              ["Norway", "nb-NO"]
+            ],
+            "Polish": [
+              ["Poland", "pl-PL"]
+            ],
+            "Portuguese": [
+              ["Brazil", "pt-BR"],
+              ["Portugal", "pt-PT"]
+            ],
+            "Romanian": [
+              ["Romania", "ro-RO"]
+            ],
+            "Russian": [
+              ["Russia", "ru-RU"]
+            ],
+            "Serbian": [
+              ["Serbia", "sr-RS"]
+            ],
+            "Slovak": [
+              ["Slovakia", "sk-SK"]
+            ],
+            "Slovenian": [
+              ["Slovenia", "sl-SI"]
+            ],
+            "Spanish": [
+              ["Argentina", "es-AR"],
+              ["Bolivia", "es-BO"],
+              ["Chile", "es-CL"],
+              ["Colombia", "es-CO"],
+              ["Costa Rica", "es-CR"],
+              ["Dominican Republic", "es-DO"],
+              ["Ecuador", "es-EC"],
+              ["El Salvador", "es-SV"],
+              ["Guatemala", "es-GT"],
+              ["Honduras", "es-HN"],
+              ["México", "es-MX"],
+              ["Nicaragua", "es-NI"],
+              ["Panamá", "es-PA"],
+              ["Paraguay", "es-PY"],
+              ["Perú", "es-PE"],
+              ["Puerto Rico", "es-PR"],
+              ["Spain", "es-ES"],
+              ["Uruguay", "es-UY"],
+              ["United States", "es-US"],
+              ["Venezuela", "es-VE"]
+            ],
+            "Swedish": [
+              ["Sweden", "sv-SE"]
+            ],
+            "Thai": [
+              ["Thailand", "th-TH"]
+            ],
+            "Turkish": [
+              ["Turkey", "tr-TR"]
+            ],
+            "Ukrainian": [
+              ["Ukraine", "uk-UA"]
+            ],
+            "Vietnamese": [
+              ["Viet Nam", "vi-VN"]
+            ],
+            "Zulu": [
+              ["South Africa", "zu-ZA"]
+            ]
+          }`;
+    
+    switch(voiceApiType){
+        case 'browserDefault':
+            return browserDefaultVoiceApi;        
+        default:
+          // If want to use developer use a voice recognition api 
+          // which already not exit in this package.
+            return "-1"    
+    }
+
+}
+
+/**
+ * 
+ * BASICS OF DEFAULT VOICE RECOGNITON API
+ */
+
+// Creating and setting a new recognition
+function setVoiceRecognition(lang){
+    var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+    recognition.lang = lang;
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 400;
+    return recognition;
+}
+
+// Start recording
+function startRecord(recognition){
+    recognition.start();
+}
+
+// Stop Recording
+function stopRecord(recognition){
+    recognition.stop();
+}
+
+// Getting the Voice Text
+function instruction(event){
+        let finalTranscript = '';
+        for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
+            let transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+            finalTranscript += transcript;
             }
-        });
-        result = result.filter(function (el) {
-            return el != null;
-        });
-        if(result.length != 0){
-            return result
         }
-        else{
-            return "-1"
-        }
-    }   
+        return finalTranscript;
+    }
+
+/**
+ * 
+ * Check the Voice Api Exist or not 
+ */
+function existingVoiceApi(existingApi){
+    return existingApi == "-1" ? false : true
 }
 
-/*
-    Accuracy 100%
-*/
-function makeResultAbs(result, keyword, func){
-    if(Array.isArray(keyword) && result != "-1"){
-        if(keyword.join(" ") == result.join(" ")){
-            let new_func = new Function(func);
-            return new_func()
-        }
-        else{
-            return "There is nothing absolute inner 100%"
+/**
+ * 
+ *  Percentage similarity between keyword and voiceText
+ * 
+ */
+function levenshtein(keyword, voiceText){
+    if(!keyword || !voiceText) return (keyword || voiceText).length;
+    var matrix = [];
+    for(var i = 0; i <= voiceText.length; i++){
+        matrix[i] = [i];
+        if(i === 0) continue;
+        for(var j = 0; j <= keyword.length; j++){
+            matrix[0][j] = j;
+            if(j === 0) continue;
+            matrix[i][j] = voiceText.charAt(i - 1) == keyword.charAt(j - 1) ? matrix[i - 1][j - 1] : Math.min(
+                matrix[i-1][j-1] + 1,
+                matrix[i][j-1] + 1,
+                matrix[i-1][j] + 1
+            );
         }
     }
-    else{
-        return "There is nothing absolute 100%"
-
-    }
+    return  (1 - matrix[voiceText.length][keyword.length] / Math.max(voiceText.length, keyword.length))*100;
 }
+
+/**
+ * 
+ *  Calculating each keyword distance between the voiceText and
+ *  hold in a JSON object
+ * 
+ */
+function actualAccuracy(distanceAl, keyword, voiceText){
+    let percantageAcc = {};
+    for(let i = 0; i < keyword.length; i++){
+        percantageAcc[keyword[i]] = distanceAl(keyword[i], voiceText).toString();
+    }
+    JSON.stringify(percantageAcc);
+    return percantageAcc
+}
+
 /* 
-    Accuracy 70%
-*/
-function makeResultHigh (result ,keyword, func){
-    let new_func = new Function(func);
-    let counter = 0;
-    if(result != "-1"){
-        keyword.map(item => {
-            if(result.join(" ").includes(item)){
-                counter++;
-            }
-        });
-        if(counter == keyword.length){
-            return new_func()
-        }
-    }else{
-        return "There is nothing to show 70%"
-    }
-}
-/*
-    Accuracy 50%
-*/ 
-function makeResultMid (result ,keyword, func){
-    let new_func = new Function(func);
-    if(result != "-1"){
-        for(let i = 0; i < keyword.length; i++){
-            if(result.join(" ").includes(keyword[i])){
-                return new_func()
-            }
-        }
-    }else{
-        return "There is nothing to show 50%"
-    }
-}
-/*
-    Accuracy 20%
-*/
+ *  Find the maximum and minimum value of keyword accuracy values
+ */
 
-function makeResultLow (result, func) {
-    if(result != "-1"){
-        let new_func = new Function(func);
-        return new_func()
-    }
-    else{
-        return "There is nothing to show 20%"
-    }
+ //Maximum value
+function maxAccuracy(accuracyList){
+    var values = [];
+    Object.keys(accuracyList).every( (prop) => values.push(Number(accuracyList[prop])));
+    return Math.max(...values)
 }
 
-function howMuchAccuracy(accuracy){
-   var acc = accuracy.split('');
-   return Number(acc.splice(0,acc.length - 1).join(''))
+//Minimum value
+function minAccuracy(accuracyList){
+    var values = [];
+    Object.keys(accuracyList).every( (prop) => values.push(Number(accuracyList[prop])));
+    return Math.min(...values)
 }
 
-function startTakingText(voiceText, index){
-    return voiceText.splice(index, 1);
-}
+/**
+ * Result the process of all as accuracy resulting
+ */
 
-function stopTakingText(voiceTextItem, timeZone){
-    let text = '';
-    for(var i = 0; i < timeZone; i++){
-        setTimeout(() => {text += voiceTextItem;}, 1000);
-    }
-    return text;
-}
-
-function takeText(text){
-    return text
-}
+ function resultProcessingVR(accuracyAct, accuracyDev, func){
+    return accuracyAct >= accuracyDev ? func() : -1
+ }
 
 class VoiceAssistant {
-    constructor(voiceType = '' ,command = { keyword : [], starting : false, func : '(() => {return "null"})', accuracy: '70%'} ){
-        this.command = command;
-        this.voiceApi = voiceApi;
-        this.textMining = textMining;
-        this.makeResultHigh = makeResultHigh;
-        this.makeResultAbs = makeResultAbs;
-        this.makeResultMid = makeResultMid;
-        this.makeResultLow = makeResultLow;
-        this.howMuchAccuracy = howMuchAccuracy;
+    constructor(
+        voiceType = {
+            type: '',
+            lang: ''
+        },
+        command = {
+            keyword: [],
+            func : '',
+            accuracy: '',
+            pref: ''
+        }
+    )
+    {
+        //Properties of VoiceAssistant
         this.voiceType = voiceType;
-        this.startTakingText = startTakingText;
-        this.stopTakingText = stopTakingText;
-        this.takeText = takeText;
-        this.setText = setText;
+        this.command = command;
+
+        //Developer accuracy
+        this.howMuchAccuracy = howMuchAccuracy;
+
+        //voiceText is empty or not
+        this.isEmpty = isEmpty;
+
+        //about prefered Voice Recognition Api
+        this.getVoiceApiInfo = getVoiceApiInfo;
+
+        //voice api exist or not
+        this.existingVoiceApi = existingVoiceApi;
+
+        //similarity between keywords and voiceText as Levenshtein Distance Algorithm
+        this.levenshtein = levenshtein;
+
+        //Levenshtein accuracy of each keyword item
+        this.actualAccuracy = actualAccuracy;
+
+        //max and min accuracy
+        this.maxAccuracy = maxAccuracy;
+        this.minAccuracy = minAccuracy;
+
+        //resulting
+        this.resultProcessVR = resultProcessingVR;
+
+        /*
+            Browser Recognition Process
+        */ 
+        this.setVoiceRecognition = setVoiceRecognition; //set the congif of recognition
+        this.startRecord = startRecord;                 //start the recording
+        this.stopRecord = stopRecord;                   //stop the recording
+        this.instruction = instruction;                 //get the voice text
     }
-    /*
-    getCommand(){
-        return this.command
+
+    //To learn about the Voice Recognition Api you preferred
+    getAPIInfo(){
+        return getVoiceApiInfo(this.voiceType.type);
     }
-    */
-    controlling(){
-        return this.stopTakingText(["osman", "ali", "hüseyin"], 2);
+
+    //converting command.accuracy to a number
+    developerAccuracyNum(){
+        return howMuchAccuracy(this.command.accuracy);
     }
-    startRecognition() {
-        return voiceApi(this.command.starting)
+
+    //checking: voiceText is empty or not
+    checkingVoiceText(){
+        return isEmpty(voiceText);
     }
-    resultTextMining(){
-        return textMining(this.command.keyword, this.startRecognition())
+
+    //Check the voice Api Exist or not
+    checkingVoiceApi(){
+        return this.existingVoiceApi(this.getVoiceApiInfo(this.voiceType.type));
     }
-    showResult(){
-        if(this.howMuchAccuracy(this.command.accuracy) > 89 && this.howMuchAccuracy(this.command.accuracy) < 101){
-            return makeResultAbs(this.resultTextMining(), this.command.keyword, this.command.func)
+
+    //Levenshtein Distance Algorithm
+    checkActualAccuracy(voiceText){
+        return actualAccuracy(this.levenshtein, this.command.keyword, voiceText);
+    }
+
+    //check max Accuracy 
+    checkMax(voiceText){
+        return maxAccuracy(this.checkActualAccuracy(voiceText));
+    }
+
+    //check min Accuracy
+    checkMin(voiceText){
+        return minAccuracy(this.checkActualAccuracy(voiceText));
+    }
+
+    //setting configuration of a new Voice Recognition
+    setVoiceRecConfig() {
+        return setVoiceRecognition(this.voiceType.lang);
+    }
+
+    //starting Voice Recognition
+    startRecognition(recognition){
+        startRecord(recognition);
+    }
+
+    //stoping Voice Recognition
+    stopRecognition(recognition){
+        stopRecord(recognition);
+    }
+
+    //getting Voice Text
+    getVoiceText(e){
+        return this.instruction(e)
+    }
+
+    //Developer preference max or min
+    devPref(voiceText){
+        switch(this.command.pref){
+            case 'max':
+                return this.checkMax(voiceText);
+            case 'min':
+                return this.checkMin(voiceText);
         }
-        else if(this.howMuchAccuracy(this.command.accuracy) < 90 && this.howMuchAccuracy(this.command.accuracy) > 69){
-            return makeResultHigh(this.resultTextMining(), this.command.keyword, this.command.func);
-        }   
-        else if(this.howMuchAccuracy(this.command.accuracy) < 70 && this.howMuchAccuracy(this.command.accuracy) > 49){
-            return makeResultMid(this.resultTextMining() , this.command.keyword, this.command.func);
-        }
-        else if(this.howMuchAccuracy(this.command.accuracy) < 50 && this.howMuchAccuracy(this.command.accuracy) >= 0){
-            return makeResultLow(this.resultTextMining(),this.command.func)
-        }else{
-            return "*****\n\nYour accuracy value is over range of the default values, please update your accuracy value between 0 and 100!\n\n*****"
-        }
+    }
+
+    //result all process
+    resultProcessVoiceRecog(voiceText){
+        return this.resultProcessVR(this.devPref(voiceText), this.developerAccuracyNum(), this.command.func)
     }
 }
 
-var recogni = new VoiceAssistant('type-1',{
-    keyword : ["Lorem", "Ipsum"],
-    starting : false,
-    func: 'console.log("\t\t\t\t\tHello World!")',
-    accuracy: '-151%'
-});
-
-console.log(recogni.controlling());
+module.exports = VoiceAssistant;
