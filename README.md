@@ -108,7 +108,7 @@ recognition.stopRecognition(new_reco);
 
 //getting instruction of voice (Voice Text)
 new_reco.onresult((event) => {
-    console.log(recognition.getVoiceText(event));
+    recognition.resultProcessVoiceRecog(recognition.getVoiceText(event));
 })
 
 
@@ -186,6 +186,46 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 ```
     $> {hi: '81.54654654', hello: '12.252156'}
 ```
+
+```checkMax(voiceText)```: Taking maximum distance percentage of keywords Levenshtein Accuracy
+
+```console.log(recognition.checkMax(voiceText))```
+
+```
+    $> 81.256256
+```
+
+```checkMin(voiceText)```: Taking minimum distance percentage of keywords Levenshtein Accuracy
+
+```console.log(recognition.checkMin(voiceText))```
+
+```
+    $> 81.256256
+```
+
+```checkingVoiceText(voiceText)```: Check the voice text is emptyor not
+
+```console.log(recognition.checkingVoiceText(voiceText))```
+
+```
+    $> 'voiceText'
+```
+
+
+# Warning
+
+    * All the error related between developer and Voirex return -1. Developers can check their code error wtih this way.
+#### For Example
+If the browser does not support Voirex, setVoiceRecConfig() method return then, if you use a uncommon browser, you can check the browser support feature by writing the value of setVoiceConfig() method.
+
+
+
+
+
+
+
+
+
 
    
 
