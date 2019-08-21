@@ -214,7 +214,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 # Warning
 
-    * All the error related between developer and Voirex return -1. Developers can check their code error wtih this way.
+    * All the error related between developer and Voirex return -1. Developers can check their code error with this way.
 #### For Example
 If the browser does not support Voirex, setVoiceRecConfig() method return then, if you use a uncommon browser, you can check the browser support feature by writing the value of setVoiceConfig() method.
 
