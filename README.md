@@ -16,7 +16,7 @@ Actually, Voirex is a Speech to Function library which will updated and develope
 * Create a dictation object to convert voice to text easily
 * Simulate some commands without microphone
 * Pause and resume command recognition
-* Text analysis with using Levenshtein Algorithm
+* Text analysis with using Levenshtein Distance Algorithm
 * Prefering the language which you want 
 * Taking object property as function and running according to similarity of VoiceText and keywords which you want
 * Ability to work with different Javascript environments(Vanilla.js, Node.js, ES6, ES5 etc.)
@@ -75,6 +75,51 @@ Explanation of above code:
 ```accuracy: '52%'```: over which accuracy of analysis function run
 
 ```pref: 'max'```: If there are keywords more than one, as which one  voirex run
+
+# Basic Usage
+With using Voirex Speech to function API, adding command is so easy.
+```
+//importing voirex
+import Voirex from 'voirex';
+
+//creating a voirex object to start the recognition
+let recognition = new Voirex(
+  {
+    type: 'browserDefault',
+    lang: 'tr-TR'
+  },
+  {
+    keyword: ['Hi', 'Hello'],
+    func: myfunc,
+    accuracy: '52%',
+    pref: 'max'
+  }
+);
+
+
+//setting a new recognition 
+let new_reco = recognition.setVoiceRecConfig();
+
+//start the recognition
+recognition.startRecognition(new_reco);
+
+//stop the recognition 
+recognition.stopRecognition(new_reco);
+
+//getting instruction of voice (Voice Text)
+new_reco.onresult((event) => {
+    console.log(recognition.getVoiceText(event));
+})
+
+
+```
+
+### With the above code you can;
+* do Dynamic Voice Recognition by selecting one of Voice Recognition APIs which integrated with Voirex,
+* analyze the similarity of voice text and your keywords with Levenshtein Distance Algorithm like 
+```{hi: '35.252365', hello: '80.5562255'}```
+* comparing your accuracy and levenshtein accuracy, according to the result you can run the ```func```
+* 
 
 
    
