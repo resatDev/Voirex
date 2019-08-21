@@ -5,11 +5,19 @@
 
 // Creating and setting a new recognition
 export function setVoiceRecognition(lang){
-    var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
-    recognition.lang = lang;
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 400;
-    return recognition;
+    if('webkitSpeechRecognition' in window){
+        window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+        let recognition = new window.SpeechRecognition();
+        recognition.lang = lang;
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 400;
+        console.log('This browser supported by voirex')
+        return recognition
+    }
+    else{
+        alert('This browser does not support \n"""Voirex Voice Recognition Api""" \n Try to integrate with; \n\t --> Google Chrome \n\t --> Google Chromium')
+        return(-1)
+    }
 }
 
 // Start recording

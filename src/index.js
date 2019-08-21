@@ -1,10 +1,10 @@
-import VoiceAssistant from './manager';
+import Voirex from './manager';
 
 function myfunc(){
     alert('It is successfully working!')
 }
 
-var recognition = new VoiceAssistant(
+var recognition = new Voirex(
     {
         type: 'browserDefault',
         lang: 'tr-TR'
@@ -16,8 +16,8 @@ var recognition = new VoiceAssistant(
         pref: 'max'
     }
 )
-
 var new_recogntion = recognition.setVoiceRecConfig();
+
 recognition.startRecognition(new_recogntion);
 new_recogntion.onresult = (event) => {
     console.log(recognition.resultProcessVoiceRecog(recognition.getVoiceText(event)))

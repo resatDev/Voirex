@@ -8,7 +8,7 @@ import { actualAccuracy } from './actualAccuracy'
 import { maxAccuracy, minAccuracy } from './accuracyMaxMin'
 import { resultProcessingVR } from './result'
 
-class VoiceAssistant {
+class Voirex {
     constructor(
         voiceType = {
             type: '',
@@ -131,4 +131,4 @@ class VoiceAssistant {
     }
 }
 
-export default VoiceAssistant;
+export default Voirex;

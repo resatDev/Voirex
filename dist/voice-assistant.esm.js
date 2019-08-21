@@ -240,11 +240,19 @@ function getVoiceApiInfo(voiceApiType){
 
 // Creating and setting a new recognition
 function setVoiceRecognition(lang){
-    var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
-    recognition.lang = lang;
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 400;
-    return recognition;
+    if('webkitSpeechRecognition' in window){
+        window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+        let recognition = new window.SpeechRecognition();
+        recognition.lang = lang;
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 400;
+        console.log('This browser supported by voirex');
+        return recognition
+    }
+    else{
+        alert('This browser does not support \n"""Voirex Voice Recognition Api""" \n Try to integrate with; \n\t --> Google Chrome \n\t --> Google Chromium');
+        return(-1)
+    }
 }
 
 // Start recording
@@ -342,7 +350,7 @@ function minAccuracy(accuracyList){
     return accuracyAct >= accuracyDev ? func() : -1
  }
 
-class VoiceAssistant {
+class Voirex {
     constructor(
         voiceType = {
             type: '',
@@ -465,4 +473,25 @@ class VoiceAssistant {
     }
 }
 
-export default VoiceAssistant;
+function myfunc(){
+    alert('It is successfully working!');
+}
+
+var recognition = new Voirex(
+    {
+        type: 'browserDefault',
+        lang: 'tr-TR'
+    },
+    {
+        keyword: ['merhaba', 'selam'],
+        func: myfunc,
+        accuracy: '2%',
+        pref: 'max'
+    }
+);
+var new_recogntion = recognition.setVoiceRecConfig();
+
+recognition.startRecognition(new_recogntion);
+new_recogntion.onresult = (event) => {
+    console.log(recognition.resultProcessVoiceRecog(recognition.getVoiceText(event)));
+};
