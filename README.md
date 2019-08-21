@@ -107,9 +107,9 @@ recognition.startRecognition(new_reco);
 recognition.stopRecognition(new_reco);
 
 //getting instruction of voice (Voice Text)
-new_reco.onresult((event) => {
+new_reco.onresult = (event) => {
     recognition.resultProcessVoiceRecog(recognition.getVoiceText(event));
-})
+}
 
 
 ```
