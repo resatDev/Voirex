@@ -16,7 +16,7 @@ Actually, Voirex is a Speech to Function library which will updated and develope
 * Create a dictation object to convert voice to text easily
 * Simulate some commands without microphone
 * Pause and resume command recognition
-* Text analysis with using Levenshtein Distance Algorithm
+* Text analysis with using ```Levenshtein Distance Algorithm```
 * Prefering the language which you want 
 * Taking object property as function and running according to similarity of VoiceText and keywords which you want
 * Ability to work with different Javascript environments(Vanilla.js, Node.js, ES6, ES5 etc.)
@@ -118,9 +118,74 @@ new_reco.onresult((event) => {
 * do Dynamic Voice Recognition by selecting one of Voice Recognition APIs which integrated with Voirex,
 * analyze the similarity of voice text and your keywords with Levenshtein Distance Algorithm like 
 ```{hi: '35.252365', hello: '80.5562255'}```
-* comparing your accuracy and levenshtein accuracy, according to the result you can run the ```func```
-* 
+* compare your accuracy and levenshtein accuracy, according to the result you can run the ```func```
+* get the voice text
 
+As I mentioned above, you can easily install and import Voirex and with very little row code you can embed your web app.
+
+## Advanced Methods of Voirex
+```getAPIInfo()```: All the information about you selected Voice Recognition Type
+
+```console.log(recognition.getAPIInfo());```
+
+
+
+```
+    $ >  
+        /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+            /*/*/*/DEFAULT BROWSER VOICE RECOGNITION/*/*/*/*
+            /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+
+           "Interim Results": mutable (default false) \n\n
+           "Maximum" Alternatives: mutable (default 1) \n\n
+           "Lang" : mutable (default meta charset) \n\n
+           
+           { 
+            "Afrikaans": [
+              ["South Africa", "af-ZA"]
+            ],
+            "Arabic" : [
+              ["Algeria","ar-DZ"],
+              ["Bahrain","ar-BH"],
+              ["Egypt","ar-EG"],
+              ["Israel","ar-IL"],
+              ["Iraq","ar-IQ"],
+              ["Jordan","ar-JO"],
+              ["Kuwait","ar-KW"],
+              ["Lebanon","ar-LB"],
+              ["Morocco","ar-MA"],
+              ["Oman","ar-OM"],
+              ["Palestinian Territory","ar-PS"],
+              ["Qatar","ar-QA"],
+              ["Saudi Arabia","ar-SA"],
+              ["Tunisia","ar-TN"],
+              ["UAE","ar-AE"]
+            ],
+            "Basque": [
+              ["Spain", "eu-ES"]
+            ],
+            "Bulgarian": [
+              ["Bulgaria", "bg-BG"]
+            ],
+            ...
+   
+```
+
+```checkingVoiceApi()```: Check the Voice Selected API you selected is integrated with Voirex or not
+
+```console.log(recognition.checkingVoiceApi())```
+
+```
+    $> true
+```
+
+```checkActualAccuracy(voiceText)```: Get the Levenshtein distance between keywords and Voice Recognition Text
+
+```console.log(recognition.checkActualAccuracy(recognition.getVoiceText(event)))```
+
+```
+    $> {hi: '81.54654654', hello: '12.252156'}
+```
 
    
 
