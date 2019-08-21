@@ -1,7 +1,8 @@
-(function (factory) {
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
-    factory();
-}(function () { 'use strict';
+    (global = global || self, global.voiceAssistant = factory());
+}(this, function () { 'use strict';
 
     /**
      * 
@@ -478,26 +479,6 @@
         }
     }
 
-    function myfunc(){
-        alert('It is successfully working!');
-    }
+    return Voirex;
 
-    var recognition = new Voirex(
-        {
-            type: 'browserDefault',
-            lang: 'tr-TR'
-        },
-        {
-            keyword: ['merhaba', 'selam'],
-            func: myfunc,
-            accuracy: '2%',
-            pref: 'max'
-        }
-    );
-    var new_recogntion = recognition.setVoiceRecConfig();
-
-    recognition.startRecognition(new_recogntion);
-    new_recogntion.onresult = (event) => {
-        console.log(recognition.resultProcessVoiceRecog(recognition.getVoiceText(event)));
-    };
 }));
