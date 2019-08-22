@@ -41,7 +41,7 @@ Voirex is totally written in ES6, but it can be transpiled on every version to J
  
 If you import Voirex into your we application projects, you can use this codes,
 
-```
+```javascript
 import Voirex from 'voirex';
 
 let recognition = new Voirex(
