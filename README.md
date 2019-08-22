@@ -178,19 +178,33 @@ As I mentioned above, you can easily install and import Voirex and with very lit
    
 ```
 ```checkingVoiceApi()```: Check the Voice Selected API you selected is integrated with Voirex or not
+
 ```console.log(recognition.checkingVoiceApi())```
+
 ```$> true```
+
 ```checkActualAccuracy(voiceText)```: Get the Levenshtein distance between keywords and Voice Recognition Text
+
 ```console.log(recognition.checkActualAccuracy(recognition.getVoiceText(event)))```
+
 ```$> {hi: '81.54654654', hello: '12.252156'}```
+
 ```checkMax(voiceText)```: Taking maximum distance percentage of keywords Levenshtein Accuracy
+
 ``` console.log(recognition.checkMax(voiceText))```
+
 ```$> 81.256256```
+
 ```checkMin(voiceText)```: Taking minimum distance percentage of keywords Levenshtein Accuracy
+
 ```console.log(recognition.checkMin(voiceText))```
+
 ```$> 81.256256```
+
 ```checkingVoiceText(voiceText)```: Check the voice text is emptyor not
+
 ```console.log(recognition.checkingVoiceText(voiceText))```
+
 ```$> 'voiceText'```
 # Warning
 
