@@ -5,7 +5,7 @@ import pkg from './package.json';
 export default [
 	// browser-friendly UMD build
 	{
-		input: 'src/manager.js',
+		input: 'src/index.js',
 		output: {
 			name: 'voiceAssistant',
 			file: pkg.browser,
@@ -24,7 +24,7 @@ export default [
 	// an array for the `output` option, where we can specify 
 	// `file` and `format` for each target)
 	{
-		input: 'src/manager.js',
+		input: 'src/index.js',
 		external: ['ms'],
 		output: [
 			{ file: pkg.main, format: 'cjs' },
