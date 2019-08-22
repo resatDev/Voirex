@@ -62,19 +62,19 @@ Explanation of above code:
 
 #### Voice Type 
 
-```javascript type: 'browserDefault'```: the which recognition API you want select
+``` type: 'browserDefault'```: the which recognition API you want select
 
-```javascript lang: 'tr-TR'``` : Language you want to select
+``` lang: 'tr-TR'``` : Language you want to select
 
 #### Command
 
-```javascript keyword: ['Hi', 'Hello']```: keywords which analyze with voice text
+``` keyword: ['Hi', 'Hello']```: keywords which analyze with voice text
 
-```javascript func: myfunc```: function which you want to do
+``` func: myfunc```: function which you want to do
 
-```javascript accuracy: '52%'```: over which accuracy of analysis function run
+``` accuracy: '52%'```: over which accuracy of analysis function run
 
-```javascript pref: 'max'```: If there are keywords more than one, as which one  voirex run
+``` pref: 'max'```: If there are keywords more than one, as which one  voirex run
 
 # Basic Usage
 With using Voirex Speech to function API, adding command is so easy.
@@ -126,7 +126,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 ## Advanced Methods of Voirex
 ```getAPIInfo()```: All the information about you selected Voice Recognition Type
 
-```javascript console.log(recognition.getAPIInfo());```
+``` console.log(recognition.getAPIInfo());```
 
 
 
@@ -173,7 +173,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ```checkingVoiceApi()```: Check the Voice Selected API you selected is integrated with Voirex or not
 
-```javascript console.log(recognition.checkingVoiceApi())```
+``` console.log(recognition.checkingVoiceApi())```
 
 ```bash
     $> true
