@@ -7,10 +7,12 @@ Voirex is a robust and useful wrapper of many Speect to Text (Voice Recognition)
 Actually, Voirex is a Speech to Function library which will updated and developed continuously. The main properties of Voirex;
 
 * Selecting various Voice Recogntion API you want to select 
+
     - HTML5 Web Speech API
     - Google Sound Cloud
     - IBM Watson
     - etc.
+    
 * Dynmaic and quick recognition of voice commands
 * Add commands easily 
 * Create a dictation object to convert voice to text easily
@@ -22,10 +24,15 @@ Actually, Voirex is a Speech to Function library which will updated and develope
 * Ability to work with different Javascript environments(Vanilla.js, Node.js, ES6, ES5 etc.)
 
 ### Installation
+
 ##### NPM
+
       npm install voirex
+      
 Or just download a .zip package and with the source code, minified file and commands examples with React.js.
+
 ### How to use
+
 Voirex is totally written in ES6, but it can be transpiled on every version to Javascript. Manager.js cover the main class of Voirex. And all of them converted to ES5 codes under the dist folder. 
         
         
@@ -130,7 +137,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 
 
-```bash
+```
     $ >  
         /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
             /*/*/*/DEFAULT BROWSER VOICE RECOGNITION/*/*/*/*
@@ -175,7 +182,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ``` console.log(recognition.checkingVoiceApi())```
 
-```bash
+```
     $> true
 ```
 
@@ -183,7 +190,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ```console.log(recognition.checkActualAccuracy(recognition.getVoiceText(event)))```
 
-```bash
+```
     $> {hi: '81.54654654', hello: '12.252156'}
 ```
 
@@ -191,7 +198,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ``` console.log(recognition.checkMax(voiceText))```
 
-```bash
+```
     $> 81.256256
 ```
 
@@ -199,7 +206,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ```console.log(recognition.checkMin(voiceText))```
 
-```bash
+```
     $> 81.256256
 ```
 
@@ -207,7 +214,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ```console.log(recognition.checkingVoiceText(voiceText))```
 
-```bash
+```
     $> 'voiceText'
 ```
 
