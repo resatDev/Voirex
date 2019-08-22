@@ -78,7 +78,7 @@ Explanation of above code:
 
 # Basic Usage
 With using Voirex Speech to function API, adding command is so easy.
-```
+```javascript
 //importing voirex
 import Voirex from 'voirex';
 
