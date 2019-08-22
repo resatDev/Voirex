@@ -213,6 +213,11 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 If the browser does not support Voirex, setVoiceRecConfig() method return then, if you use a uncommon browser, you can check the browser support feature by writing the value of setVoiceConfig() method.
 
 
+###### Powered by 
+
+[Reşat Memiş](https://www.linkedin.com/in/re%C5%9Fat-memi%C5%9F-7b9996150/)
+
+
 
 
 
