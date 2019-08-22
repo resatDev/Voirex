@@ -131,8 +131,11 @@ new_reco.onresult = (event) => {
 As I mentioned above, you can easily install and import Voirex and with very little row code you can embed your web app.
 
 ## Advanced Methods of Voirex
+
 ```getAPIInfo()```: All the information about you selected Voice Recognition Type
-``` console.log(recognition.getAPIInfo());```
+
+``` console.log(recognition.getAPIInfo())```
+
 ```
     $ >  
         /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
@@ -173,6 +176,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
             ...
    
 ```
+
 ```checkingVoiceApi()```: Check the Voice Selected API you selected is integrated with Voirex or not
 
 ```console.log(recognition.checkingVoiceApi())```
