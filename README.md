@@ -132,11 +132,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ## Advanced Methods of Voirex
 ```getAPIInfo()```: All the information about you selected Voice Recognition Type
-
 ``` console.log(recognition.getAPIInfo());```
-
-
-
 ```
     $ >  
         /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
