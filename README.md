@@ -183,13 +183,13 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ```console.log(recognition.checkActualAccuracy(recognition.getVoiceText(event)))```
 
-```
-    $>bash {hi: '81.54654654', hello: '12.252156'}
+```bash
+    $> {hi: '81.54654654', hello: '12.252156'}
 ```
 
 ```checkMax(voiceText)```: Taking maximum distance percentage of keywords Levenshtein Accuracy
 
-```javascript console.log(recognition.checkMax(voiceText))```
+``` console.log(recognition.checkMax(voiceText))```
 
 ```bash
     $> 81.256256
@@ -197,7 +197,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ```checkMin(voiceText)```: Taking minimum distance percentage of keywords Levenshtein Accuracy
 
-```javascript console.log(recognition.checkMin(voiceText))```
+```console.log(recognition.checkMin(voiceText))```
 
 ```bash
     $> 81.256256
@@ -205,7 +205,7 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ```checkingVoiceText(voiceText)```: Check the voice text is emptyor not
 
-```javascript console.log(recognition.checkingVoiceText(voiceText))```
+```console.log(recognition.checkingVoiceText(voiceText))```
 
 ```bash
     $> 'voiceText'
