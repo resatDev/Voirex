@@ -117,7 +117,7 @@ new_reco.onresult = (event) => {
 ### With the above code you can;
 * do Dynamic Voice Recognition by selecting one of Voice Recognition APIs which integrated with Voirex,
 * analyze the similarity of voice text and your keywords with Levenshtein Distance Algorithm like 
-```javascript {hi: '35.252365', hello: '80.5562255'}```
+```{hi: '35.252365', hello: '80.5562255'}```
 * compare your accuracy and levenshtein accuracy, according to the result you can run the ```func```
 * get the voice text
 
@@ -173,9 +173,9 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ```checkingVoiceApi()```: Check the Voice Selected API you selected is integrated with Voirex or not
 
-```console.log(recognition.checkingVoiceApi())```
+```javascript console.log(recognition.checkingVoiceApi())```
 
-```
+```bash
     $> true
 ```
 
@@ -184,30 +184,30 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 ```console.log(recognition.checkActualAccuracy(recognition.getVoiceText(event)))```
 
 ```
-    $> {hi: '81.54654654', hello: '12.252156'}
+    $>bash {hi: '81.54654654', hello: '12.252156'}
 ```
 
 ```checkMax(voiceText)```: Taking maximum distance percentage of keywords Levenshtein Accuracy
 
-```console.log(recognition.checkMax(voiceText))```
+```javascript console.log(recognition.checkMax(voiceText))```
 
-```
+```bash
     $> 81.256256
 ```
 
 ```checkMin(voiceText)```: Taking minimum distance percentage of keywords Levenshtein Accuracy
 
-```console.log(recognition.checkMin(voiceText))```
+```javascript console.log(recognition.checkMin(voiceText))```
 
-```
+```bash
     $> 81.256256
 ```
 
 ```checkingVoiceText(voiceText)```: Check the voice text is emptyor not
 
-```console.log(recognition.checkingVoiceText(voiceText))```
+```javascript console.log(recognition.checkingVoiceText(voiceText))```
 
-```
+```bash
     $> 'voiceText'
 ```
 
