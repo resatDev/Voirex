@@ -180,11 +180,9 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ```checkingVoiceApi()```: Check the Voice Selected API you selected is integrated with Voirex or not
 
-``` console.log(recognition.checkingVoiceApi())```
+```console.log(recognition.checkingVoiceApi())```
 
-```
-    $> true
-```
+```$> true```
 
 ```checkActualAccuracy(voiceText)```: Get the Levenshtein distance between keywords and Voice Recognition Text
 
@@ -198,30 +196,24 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 
 ``` console.log(recognition.checkMax(voiceText))```
 
-```
-    $> 81.256256
-```
+```$> 81.256256```
 
 ```checkMin(voiceText)```: Taking minimum distance percentage of keywords Levenshtein Accuracy
 
 ```console.log(recognition.checkMin(voiceText))```
 
-```
-    $> 81.256256
-```
+```$> 81.256256```
 
 ```checkingVoiceText(voiceText)```: Check the voice text is emptyor not
 
 ```console.log(recognition.checkingVoiceText(voiceText))```
 
-```
-    $> 'voiceText'
-```
+```$> 'voiceText'```
 
 
 # Warning
 
-    * All the error related between developer and Voirex return -1. Developers can check their code error with this way.
+    * All the error related between Javascript and Voirex return -1. Developers can check their code error with this way.
 #### For Example
 If the browser does not support Voirex, setVoiceRecConfig() method return then, if you use a uncommon browser, you can check the browser support feature by writing the value of setVoiceConfig() method.
 
