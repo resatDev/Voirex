@@ -62,19 +62,19 @@ Explanation of above code:
 
 #### Voice Type 
 
-```type: 'browserDefault'```: the which recognition API you want select
+```javascript type: 'browserDefault'```: the which recognition API you want select
 
-```lang: 'tr-TR'``` : Language you want to select
+```javascript lang: 'tr-TR'``` : Language you want to select
 
 #### Command
 
-```keyword: ['Hi', 'Hello']```: keywords which analyze with voice text
+```javascript keyword: ['Hi', 'Hello']```: keywords which analyze with voice text
 
-```func: myfunc```: function which you want to do
+```javascript func: myfunc```: function which you want to do
 
-```accuracy: '52%'```: over which accuracy of analysis function run
+```javascript accuracy: '52%'```: over which accuracy of analysis function run
 
-```pref: 'max'```: If there are keywords more than one, as which one  voirex run
+```javascript pref: 'max'```: If there are keywords more than one, as which one  voirex run
 
 # Basic Usage
 With using Voirex Speech to function API, adding command is so easy.
@@ -117,7 +117,7 @@ new_reco.onresult = (event) => {
 ### With the above code you can;
 * do Dynamic Voice Recognition by selecting one of Voice Recognition APIs which integrated with Voirex,
 * analyze the similarity of voice text and your keywords with Levenshtein Distance Algorithm like 
-```{hi: '35.252365', hello: '80.5562255'}```
+```javascript {hi: '35.252365', hello: '80.5562255'}```
 * compare your accuracy and levenshtein accuracy, according to the result you can run the ```func```
 * get the voice text
 
@@ -126,11 +126,11 @@ As I mentioned above, you can easily install and import Voirex and with very lit
 ## Advanced Methods of Voirex
 ```getAPIInfo()```: All the information about you selected Voice Recognition Type
 
-```console.log(recognition.getAPIInfo());```
+```javascript console.log(recognition.getAPIInfo());```
 
 
 
-```
+```bash
     $ >  
         /*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
             /*/*/*/DEFAULT BROWSER VOICE RECOGNITION/*/*/*/*
