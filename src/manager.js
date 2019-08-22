@@ -89,7 +89,6 @@ class Voirex {
     checkMax(voiceText){
         return maxAccuracy(this.checkActualAccuracy(voiceText));
     }
-
     //check min Accuracy
     checkMin(voiceText){
         return minAccuracy(this.checkActualAccuracy(voiceText));

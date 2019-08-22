@@ -1,7 +1,4 @@
-var Voirex = require('./../dist/voice-assistant.umd').Voirex
-
-
-
+import Voirex from './manager'
 function myfunc(){
     alert('It is successfully working!')
 }

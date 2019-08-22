@@ -250,7 +250,7 @@ function setVoiceRecognition(lang){
         return recognition
     }
     else{
-        alert('This browser does not support \n"""Voirex Voice Recognition Api""" \n Try to integrate with; \n\t --> Google Chrome \n\t --> Google Chromium');
+        console.log("This browser does not support Voirex \n Supported browsers; \n --> Google Chrome \n --> Google Chromium");
         return(-1)
     }
 }
@@ -431,7 +431,6 @@ class Voirex {
     checkMax(voiceText){
         return maxAccuracy(this.checkActualAccuracy(voiceText));
     }
-
     //check min Accuracy
     checkMin(voiceText){
         return minAccuracy(this.checkActualAccuracy(voiceText));
