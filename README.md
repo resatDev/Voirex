@@ -27,7 +27,7 @@ Actually, Voirex is a Speech to Function library which will updated and develope
 
 ##### NPM
 
-      npm install voirex
+      npm install voirexx
       
 Or just download a .zip package and with the source code, minified file and commands examples with React.js.
 
@@ -49,7 +49,7 @@ Voirex is totally written in ES6, but it can be transpiled on every version to J
 If you import Voirex into your we application projects, you can use this codes,
 
 ```javascript
-import Voirex from 'voirex';
+import Voirex from 'voirexx';
 
 let recognition = new Voirex(
   {
@@ -87,7 +87,7 @@ Explanation of above code:
 With using Voirex Speech to function API, adding command is so easy.
 ```javascript
 //importing voirex
-import Voirex from 'voirex';
+import Voirex from 'voirexx';
 
 //creating a voirex object to start the recognition
 let recognition = new Voirex(
